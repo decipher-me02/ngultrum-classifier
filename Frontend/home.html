@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <title>Ngultrum Classifier</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- Logo -->
+            <a href="index.html" class="logo-link">
+                <div class="logo-title-wrapper">
+                  <img src="assets/images/logo.png" alt="Logo" class="logo-img">
+                  <span class="site-title">NGULTRUM CLASSIFIER</span>
+                </div>
+              </a>              
+          
+            <!-- Hamburger Menu -->
+            <div class="menu-trigger" id="menu-toggle">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          
+            <!-- Menu Items -->
+            <ul class="nav" id="mobile-nav">
+              <li><a href="home.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+            </ul>
+          </nav>             
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Content Section Start ***** -->
+  <section class="hero">
+    <div class="container text-center">
+      <h1 class="animate__animated animate__fadeInUp">How It Works</h1>
+      <p class="animate__animated animate__fadeInUp animate__delay-1s">
+        Simply allow access to your device's camera, and point it at a Bhutanese Ngultrum note. The system will automatically capture the image and classify the denomination in real-time.
+      </p>
+      <div class="box-button animate__animated animate__zoomIn animate__delay-2s">
+        <div class="button-wrapper">
+          <div class="button-borders">
+            <button id="camera-access-btn" class="primary-button">Allow Access to Camera</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  
+ <!-- ***** pop up Start ***** -->
+ <div id="cookie-popup" class="cookie-popup">
+    <div class="cookie-card">
+      <span class="title">Attention!</span>
+      <p class="description">
+        We use the image captured from your device to store in our database for future implementations.
+      </p>
+      <div class="actions">
+        <button class="accept" onclick="window.location.href='camera.html'">Accept</button>
+        <button class="decline" onclick="closeCookiePopup()">Decline</button>
+      </div>
+    </div>
+  </div>
+  
+
+ <!-- ***** pop end ***** -->
+  
+
+  <!-- ***** Content Section End ***** -->
+
+  <!-- ***** Footer Section Start ***** -->
+  <footer class="footer-area">
+    <div class="container"> 
+      <div class="col-lg-12 text-center">
+        <p>© 2025 Ngultrum Classifier | All rights reserved</p>
+      </div>
+    </div>
+  </footer>
+  <!-- ***** Footer Section End ***** -->
+
+  <!-- Scripts -->
+
+  
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/custom.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menu-toggle");
+    const nav = document.getElementById("mobile-nav");
+
+    menuToggle.addEventListener("click", function () {
+      menuToggle.classList.toggle("active");
+      nav.classList.toggle("show");
+    });
+  });
+</script>
+
+<script>
+    const cameraBtn = document.getElementById("camera-access-btn");
+    const cookiePopup = document.getElementById("cookie-popup");
+  
+    cameraBtn.addEventListener("click", () => {
+      cookiePopup.style.display = "flex";
+    });
+  
+    function closeCookiePopup() {
+      cookiePopup.style.display = "none";
+    }
+  </script>
+  
+  
+</body>
+
+</html>
