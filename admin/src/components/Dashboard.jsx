@@ -17,14 +17,14 @@ const Dashboard = () => {
   }, []);
 
   const fetchDetections = () => {
-    axios.get("http://localhost:5000/detections").then((res) => {
+    axios.get("https://ngultrum-classifier.onrender.com/detections").then((res) => {
       if (res.data.success) setDetections(res.data.data);
     });
   };
 
   const deleteImage = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:5000/detections/${id}`);
+      const res = await axios.delete(`https://ngultrum-classifier.onrender.com/detections/${id}`);
       if (res.data.success) {
         setDetections((prev) => prev.filter((item) => item.id !== id));
       } else {
