@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, send_file
-from flask_cors import CORS
 from pymongo import MongoClient
 import zipfile
 import io
@@ -12,7 +11,6 @@ import os
 
 
 app = Flask(__name__)
-CORS(app, origins=["https://ngultrum-classifier-frontend-5mo2.onrender.com"])
 
 # MongoDB connection
 client = MongoClient("mongodb+srv://12210088gcit:m6rVDh6FLY61OBNt@clusterngultrum.nuziaej.mongodb.net/?retryWrites=true&w=majority&appName=ClusterNgultrum")

@@ -71,7 +71,10 @@
     <h2 class="camera-heading">Your AI Ngultrum classifier!</h2>
     <video id="camera-stream" autoplay playsinline></video>
   </section>
-  
+  <!-- Prediction Output -->
+  <div style="text-align:center; margin-top: 20px;">
+    <h4 id="output-text" style="color: #333;">Prediction: ...</h4>
+  </div>
 
   <!-- ***** Content Section End ***** -->
 
@@ -82,6 +85,7 @@
         <p>© 2025 Ngultrum Classifier | All rights reserved</p>
       </div>
     </div>
+  
   </footer>
   <!-- ***** Footer Section End ***** -->
 
@@ -149,7 +153,12 @@
     overlay.style.pointerEvents = "none";
     video.parentNode.appendChild(overlay);
 
+    let processing = false;
+
     setInterval(() => {
+      if (processing) return; // Skip if we're still waiting on previous response
+      processing = true;
+
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
       const base64Image = canvas.toDataURL("image/jpeg").split(",")[1];
 
@@ -170,6 +179,9 @@
         })
         .catch((err) => {
           console.error("Prediction failed:", err);
+        })
+        .finally(() => {
+          processing = false; // Allow next frame after this completes
         });
     }, 1500);
   }
@@ -177,10 +189,7 @@
   document.addEventListener("DOMContentLoaded", startCameraAndDetection);
 </script>
 
-<!-- Prediction Output -->
-<div style="text-align:center; margin-top: 20px;">
-  <h4 id="output-text" style="color: #333;">Prediction: ...</h4>
-</div>
+
 
   
   
