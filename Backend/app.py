@@ -12,7 +12,7 @@ import os
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://ngultrum-classifier-frontend-5mo2.onrender.com"])
 
 # MongoDB connection
 client = MongoClient("mongodb+srv://12210088gcit:m6rVDh6FLY61OBNt@clusterngultrum.nuziaej.mongodb.net/?retryWrites=true&w=majority&appName=ClusterNgultrum")
