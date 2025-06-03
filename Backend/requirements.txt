@@ -1,4 +1,8 @@
 flask
+flask-cors
+pymongo
 torch
 torchvision
-flask-cors
+opencv-python
+Pillow
+ultralytics

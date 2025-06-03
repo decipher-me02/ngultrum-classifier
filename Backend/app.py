@@ -7,7 +7,7 @@ import base64
 from datetime import datetime
 import utils
 from bson import ObjectId
-
+import os 
 
 
 
@@ -114,4 +114,5 @@ def predict():
         return jsonify({"success": False, "error": str(e)})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
