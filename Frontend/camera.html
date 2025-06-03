@@ -17,45 +17,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 
-<script>
-  function startCamera() {
-  const video = document.getElementById("camera-stream");
-  const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext("2d");
-
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-      video.srcObject = stream;
-
-      setInterval(() => {
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const base64Image = canvas.toDataURL("image/jpeg").split(",")[1];
-
-        fetch("https://ngultrum-classifier.onrender.com/predict", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ image: base64Image })
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            document.getElementById("processed-frame").src = "data:image/jpeg;base64," + data.boxed_image;
-          }
-        });
-
-      }, 3000); // send every 3 seconds
-    })
-    .catch(function (err) {
-      console.error("Camera access failed:", err);
-    });
-}
-
-document.addEventListener("DOMContentLoaded", startCamera);
-
-
-</script>
-
-
 <body>
 
   <!-- ***** Preloader Start ***** -->
@@ -107,17 +68,10 @@ document.addEventListener("DOMContentLoaded", startCamera);
 
   <!-- ***** Content Section Start ***** -->
   <section class="hero text-center">
-    <!-- Inside <section class="hero text-center"> -->
     <h2 class="camera-heading">Your AI Ngultrum classifier!</h2>
-   <video id="camera-stream" autoplay playsinline style="display: none;"></video>
-    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-    <img id="processed-frame" width="640" height="480" alt="Detected Frame" />
-
-
+    <video id="camera-stream" autoplay playsinline></video>
   </section>
   
-  <!-- Prediction Output -->
-
 
   <!-- ***** Content Section End ***** -->
 
@@ -160,70 +114,76 @@ document.addEventListener("DOMContentLoaded", startCamera);
     return /Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
 
-  function startCamera() {
-    let constraints;
-
-    if (isMobileOrTablet()) {
-      constraints = { video: { facingMode: { exact: "environment" } } };
-    } else {
-      constraints = { video: { facingMode: "user" } };
-    }
+  function startCameraAndDetection() {
+    let constraints = isMobileOrTablet()
+      ? { video: { facingMode: { exact: "environment" } } }
+      : { video: { facingMode: "user" } };
 
     navigator.mediaDevices.getUserMedia(constraints)
-      .then(function(stream) {
-        const video = document.getElementById('camera-stream');
+      .then(function (stream) {
+        const video = document.getElementById("camera-stream");
         video.srcObject = stream;
+        video.onloadedmetadata = () => {
+          video.play();
+          startRealTimeDetection(video);
+        };
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error("Camera access error:", error);
         alert("Unable to access camera.");
       });
   }
 
-  // Real-Time Detection
-  function startRealTimeDetection() {
-    const video = document.getElementById("camera-stream");
+  function startRealTimeDetection(video) {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
-
     canvas.width = 640;
     canvas.height = 480;
 
-    setInterval(() => {
-      if (!video.srcObject) return;
+    const overlay = document.createElement("img");
+    overlay.id = "bbox-overlay";
+    overlay.style.position = "absolute";
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = "100%";
+    overlay.style.pointerEvents = "none";
+    video.parentNode.appendChild(overlay);
 
+    setInterval(() => {
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      const dataURL = canvas.toDataURL("image/jpeg");
-      const base64Image = dataURL.split(",")[1];
+      const base64Image = canvas.toDataURL("image/jpeg").split(",")[1];
 
       fetch("https://ngultrum-classifier.onrender.com/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image: base64Image })
+        body: JSON.stringify({ image: base64Image }),
       })
-      .then(res => res.json())
-      .then(data => {
-        const output = document.getElementById("output-text");
-        if (data.success) {
-          output.textContent = "Prediction: " + data.predicted_class;
-        } else {
-          output.textContent = "Error: " + data.error;
-        }
-      })
-      .catch(err => {
-        console.error("Prediction failed:", err);
-      });
-
-    }, 3000); // Send every 3 seconds
+        .then((res) => res.json())
+        .then((data) => {
+          const output = document.getElementById("output-text");
+          if (data.success) {
+            overlay.src = "data:image/jpeg;base64," + data.boxed_image;
+            output.textContent = "Detected: " + (data.classes || []).join(", ");
+          } else {
+            output.textContent = "Error: " + data.error;
+          }
+        })
+        .catch((err) => {
+          console.error("Prediction failed:", err);
+        });
+    }, 1500);
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    startCamera();
-    startRealTimeDetection();
-  });
+  document.addEventListener("DOMContentLoaded", startCameraAndDetection);
 </script>
 
+<!-- Prediction Output -->
+<div style="text-align:center; margin-top: 20px;">
+  <h4 id="output-text" style="color: #333;">Prediction: ...</h4>
+</div>
 
+  
+  
   
 </body>
 
