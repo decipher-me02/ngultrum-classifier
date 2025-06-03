@@ -83,13 +83,16 @@ def predict():
         data = request.json
         image_b64 = data["image"]
 
-        # Decode image
+        # Step 1: Decode base64 image
         pil_img = utils.decode_base64_image(image_b64)
 
-        # Run detection
-        results = utils.model.predict(pil_img, task="obb", imgsz=640)
+        # Step 2: Convert to NumPy array for YOLOv8 compatibility
+        cv_img = np.array(pil_img)
 
-        # Get class names
+        # Step 3: Run prediction using OBB task
+        results = utils.model.predict(cv_img, task="obb", imgsz=640)
+
+        # Step 4: Extract predicted classes
         predicted_classes = []
         if results and results[0].obb and results[0].obb.cls.numel() > 0:
             for cls in results[0].obb.cls:
@@ -97,21 +100,32 @@ def predict():
         else:
             predicted_classes.append("No Detection")
 
-        # Plot image with boxes
-        plotted_img = results[0].plot()  # Draw boxes on image
+        # Debugging logs (for terminal)
+        print("Detected Classes:", predicted_classes)
+        print("Bounding Info:", results[0].obb if results[0].obb else "No OBB results")
+
+        # Step 5: Get image with bounding boxes
+        plotted_img = results[0].plot()  # OpenCV image with bounding boxes
         processed_b64 = utils.encode_image_to_base64(plotted_img)
 
-        # Save to MongoDB
+        # Step 6: Save original image (not the plotted one) to MongoDB
+        from datetime import datetime
         collection.insert_one({
             "image_base64": image_b64,
             "predicted_classes": predicted_classes,
             "timestamp": datetime.utcnow()
         })
 
-        return jsonify({"success": True, "boxed_image": processed_b64})
+        # Step 7: Return the image with bounding boxes to frontend
+        return jsonify({
+            "success": True,
+            "boxed_image": processed_b64,
+            "predicted_class": ", ".join(predicted_classes)
+        })
 
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
