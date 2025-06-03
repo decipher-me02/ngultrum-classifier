@@ -28,7 +28,7 @@ const Dashboard = () => {
 
   const fetchDetections = () => {
     setLoading(true);
-    axios.get("https://ngultrum-classifier.onrender.com/detections").then((res) => {
+    axios.get("https://ngultrum-classifier-1.onrender.com/detections").then((res) => {
       if (res.data.success) setDetections(res.data.data);
       setLoading(false);
     }).catch(() => setLoading(false));
@@ -38,7 +38,7 @@ const Dashboard = () => {
     if (!window.confirm("Are you sure you want to delete this image?")) return;
     try {
       const res = await axios.delete(
-        `https://ngultrum-classifier.onrender.com/detections/${id}`
+        `https://ngultrum-classifier-1.onrender.com/detections/${id}`
       );
       if (res.data.success) {
         setDetections((prev) => prev.filter((item) => item.id !== id));
@@ -78,7 +78,7 @@ const Dashboard = () => {
   };
 
   const downloadAll = () => {
-    window.open("https://ngultrum-classifier.onrender.com/download-zip");
+    window.open("https://ngultrum-classifier-1.onrender.com/download-zip");
   };
 
   return (
