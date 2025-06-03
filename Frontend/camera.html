@@ -31,7 +31,7 @@
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         const base64Image = canvas.toDataURL("image/jpeg").split(",")[1];
 
-        fetch("http://localhost:5000/predict", {
+        fetch("https://ngultrum-classifier.onrender.com/predict", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ image: base64Image })
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", startCamera);
       const dataURL = canvas.toDataURL("image/jpeg");
       const base64Image = dataURL.split(",")[1];
 
-      fetch("http://localhost:5000/predict", {
+      fetch("https://ngultrum-classifier.onrender.com/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ image: base64Image })
