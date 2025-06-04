@@ -7,10 +7,16 @@ from datetime import datetime
 import utils
 from bson import ObjectId
 import os 
-
-
+from flask_cors import CORS  
 
 app = Flask(__name__)
+
+# ✅ Allow only your frontend domain
+CORS(app, origins=[
+    "https://ngultrum-classifier-frontend-5mo2.onrender.com",
+    "https://ngultrum-classifier-admin.onrender.com"
+])
+
 
 # MongoDB connection
 client = MongoClient("mongodb+srv://12210088gcit:m6rVDh6FLY61OBNt@clusterngultrum.nuziaej.mongodb.net/?retryWrites=true&w=majority&appName=ClusterNgultrum")
