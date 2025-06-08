@@ -27,6 +27,7 @@ collection = db["detections"]
 def index():
     return "YOLOv8 OBB Detection API Running"
 
+# ✅ DELETE detection
 @app.route("/detections/<string:detection_id>", methods=["DELETE"])
 def delete_detection(detection_id):
     try:
@@ -38,17 +39,24 @@ def delete_detection(detection_id):
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
 
+# ✅ Download ZIP (only real detections, no sort needed)
 @app.route("/download-zip", methods=["GET"])
 def download_zip():
     try:
-        records = list(collection.find().sort("timestamp", -1))  # Get all
+        pipeline = [
+            {"$match": {"predicted_classes": {"$ne": ["No Detection"]}}},
+            {"$project": {"image_base64": 1, "predicted_classes": 1}}
+        ]
+        cursor = collection.aggregate(pipeline)
+        records = list(cursor)
+
         class_map = {}
 
         for idx, r in enumerate(records):
             for cls in r["predicted_classes"]:
                 if cls not in class_map:
                     class_map[cls] = []
-                filename = f"image_{idx+1}.jpg"
+                filename = f"image_{idx + 1}.jpg"
                 image_bytes = base64.b64decode(r["image_base64"])
                 class_map[cls].append((filename, image_bytes))
 
@@ -64,23 +72,26 @@ def download_zip():
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
 
+# ✅ Get latest detections
 @app.route("/detections", methods=["GET"])
 def get_detections():
     try:
-        records = list(collection.find().sort("timestamp", -1).limit(50))
+        records = list(collection.find({"predicted_classes": {"$ne": ["No Detection"]}})
+                      .sort("timestamp", -1).limit(50))
+
         results = []
         for r in records:
             results.append({
                 "id": str(r["_id"]),
                 "image": r["image_base64"],
                 "classes": r["predicted_classes"],
-                "timestamp": r["timestamp"].isoformat()
+                "timestamp": r.get("timestamp", datetime.utcnow()).isoformat()
             })
         return jsonify({"success": True, "data": results})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
 
-
+# ✅ Predict endpoint
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
@@ -102,17 +113,22 @@ def predict():
             predicted_classes.append("No Detection")
 
         # Plot image with boxes
-        plotted_img = results[0].plot()  # Draw boxes on image
+        plotted_img = results[0].plot()
         processed_b64 = utils.encode_image_to_base64(plotted_img)
 
-        # Save to MongoDB
-        collection.insert_one({
-            "image_base64": image_b64,
-            "predicted_classes": predicted_classes,
-            "timestamp": datetime.utcnow()
-        })
+        # ✅ Only save to MongoDB if real detection
+        if "No Detection" not in predicted_classes:
+            collection.insert_one({
+                "image_base64": image_b64,
+                "predicted_classes": predicted_classes,
+                "timestamp": datetime.utcnow()
+            })
 
-        return jsonify({"success": True, "boxed_image": processed_b64})
+        return jsonify({
+            "success": True,
+            "boxed_image": processed_b64,
+            "classes": predicted_classes
+        })
 
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
