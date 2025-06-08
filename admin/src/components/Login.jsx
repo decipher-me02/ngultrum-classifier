@@ -11,7 +11,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username === "admin" && password === "admin123") {
+    if (username === "admin" && password === "admin@123#") {
       localStorage.setItem("isLoggedIn", "true");
       navigate("/dashboard"); // redirect after login
     } else {
