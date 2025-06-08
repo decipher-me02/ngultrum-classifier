@@ -2,98 +2,89 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <title>Ngultrum Classifier</title>
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
-
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="assets/css/camera.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <title>NuLens</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/camera.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
 
-  <!-- ***** Preloader Start ***** -->
-  <div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-      <span class="dot"></span>
-      <div class="dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+  <div class="preloader-inner">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
   </div>
-  <!-- ***** Preloader End ***** -->
+</div>
+<!-- ***** Preloader End ***** -->
 
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <nav class="main-nav">
-            <!-- Logo -->
-            <a href="index.html" class="logo-link">
-                <div class="logo-title-wrapper">
-                  <img src="assets/images/logo.png" alt="Logo" class="logo-img">
-                  <span class="site-title">NGULTRUM CLASSIFIER</span>
-                </div>
-              </a>              
-          
-            <!-- Hamburger Menu -->
-            <div class="menu-trigger" id="menu-toggle">
-              <span></span>
-              <span></span>
-              <span></span>
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <!-- Logo -->
+          <a href="index.html" class="logo-link">
+            <div class="logo-title-wrapper">
+              <img src="assets/images/logo.png" alt="Logo" class="logo-img" />
+              <span class="site-title">NuLens</span>
             </div>
-          
-            <!-- Menu Items -->
-            <ul class="nav" id="mobile-nav">
-              <li><a href="home.html">Home</a></li>
-              <li><a href="about.html">About Us</a></li>
-            </ul>
-          </nav>             
-        </div>
+          </a>
+          <!-- Hamburger Menu -->
+          <div class="menu-trigger" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <!-- Menu Items -->
+          <ul class="nav" id="mobile-nav">
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </nav>
       </div>
     </div>
-  </header>
-  
-  <!-- ***** Header Area End ***** -->
-
-  <!-- ***** Content Section Start ***** -->
-  <section class="hero text-center">
-    <h2 class="camera-heading">Your AI Ngultrum classifier!</h2>
-    <video id="camera-stream" autoplay playsinline></video>
-  </section>
-
-  <!-- Prediction Output -->
-  <div style="text-align:center; margin-top: 20px;">
-    <h4 id="output-text" style="color: #333;">Prediction: ...</h4>
   </div>
+</header>
+<!-- ***** Header Area End ***** -->
 
-  <!-- ***** Content Section End ***** -->
-
-  <!-- ***** Footer Section Start ***** -->
-  <footer class="footer-area">
-    <div class="container"> 
-      <div class="col-lg-12 text-center">
-        <p>© 2025 Ngultrum Classifier | All rights reserved</p>
-      </div>
+<!-- ***** Camera Section Start ***** -->
+<section id="camera-section" class="parallax-section">
+  <div class="container text-center">
+    <h1 class="animate__animated animate__fadeInUp">Real-time Ngultrum Detection</h1>
+    <p class="animate__animated animate__fadeInUp animate__delay-1s">
+      Point your camera at a Bhutanese Ngultrum note and watch the AI detect and classify it in real time.
+    </p>
+    <div class="video-wrapper animate__animated animate__zoomIn animate__delay-2s">
+      <video id="camera-stream" autoplay playsinline></video>
     </div>
-  
-  </footer>
-  <!-- ***** Footer Section End ***** -->
+    <div id="output-text" style="font-size: 20px; color: #FF4655; margin-top: 20px;"></div>
+  </div>
+</section>
+<!-- ***** Camera Section End ***** -->
 
-  <!-- Scripts -->
+<!-- ***** Footer Section Start ***** -->
+<footer class="footer-area">
+  <div class="container">
+    <div class="col-lg-12 text-center">
+      <p>© 2025 NuLens | All rights reserved</p>
+    </div>
+  </div>
+</footer>
+<!-- ***** Footer Section End ***** -->
 
-  
- <!-- Scripts -->
+<!-- Scripts -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/custom.js"></script>
@@ -103,10 +94,10 @@
 </script>
 
 <script>
-  // Responsive Nav Toggle
   document.addEventListener("DOMContentLoaded", function () {
     const menuToggle = document.getElementById("menu-toggle");
     const nav = document.getElementById("mobile-nav");
+
     menuToggle.addEventListener("click", function () {
       menuToggle.classList.toggle("active");
       nav.classList.toggle("show");
@@ -157,7 +148,7 @@
     let processing = false;
 
     setInterval(() => {
-      if (processing) return; // Skip if we're still waiting on previous response
+      if (processing) return;
       processing = true;
 
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -182,7 +173,7 @@
           console.error("Prediction failed:", err);
         })
         .finally(() => {
-          processing = false; // Allow next frame after this completes
+          processing = false;
         });
     }, 1500);
   }
@@ -190,11 +181,5 @@
   document.addEventListener("DOMContentLoaded", startCameraAndDetection);
 </script>
 
-
-
-  
-  
-  
 </body>
-
 </html>
