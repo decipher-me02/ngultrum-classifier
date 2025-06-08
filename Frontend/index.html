@@ -1,114 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <title>Ngultrum Classifier</title>
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
-
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="assets/css/index.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <title>NuLens</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/index.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 
 <body>
 
-  <!-- ***** Preloader Start ***** -->
-  <div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-      <span class="dot"></span>
-      <div class="dots">
-        <span></span>
-        <span></span>
-        <span></span>
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+  <div class="preloader-inner">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <!-- Logo -->
+          <a href="#hero" class="logo-link">
+            <div class="logo-title-wrapper">
+              <img src="assets/images/logo.png" alt="Logo" class="logo-img" />
+              <span class="site-title">NuLens</span>
+            </div>
+          </a>
+          <!-- Hamburger Menu -->
+          <div class="menu-trigger" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <!-- Menu Items -->
+          <ul class="nav" id="mobile-nav">
+            <li><a href="#hero" class="nav-link">Home</a></li>
+            <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+            <li><a href="#about" class="nav-link">About Us</a></li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
-  <!-- ***** Preloader End ***** -->
+</header>
+<!-- ***** Header Area End ***** -->
 
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <nav class="main-nav">
-            <!-- Logo -->
-            <a href="index.html" class="logo-link">
-              <div class="logo-title-wrapper">
-                <img src="assets/images/logo.png" alt="Logo" class="logo-img">
-                <span class="site-title">NGULTRUM CLASSIFIER</span>
-              </div>
-            </a>     
-            <!-- Hamburger Menu -->
-            <div class="menu-trigger" id="menu-toggle">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          
-            <!-- Menu Items -->
-            <ul class="nav" id="mobile-nav">
-              <li><a href="home.html">Home</a></li>
-              <li><a href="about.html">About Us</a></li>
-            </ul>
-          </nav>             
+<!-- ***** Hero Section Start ***** -->
+<section id="hero" class="hero">
+  <div class="container text-center">
+    <img src="assets/images/Hero_1.png" alt="classifier Logo" class="hero-logo animate__animated animate__fadeInDown" />
+    <h1 class="animate__animated animate__fadeInUp animate__delay-1s">Detect Your Ngultrums!</h1>
+    <p class="animate__animated animate__fadeInUp animate__delay-2s">
+      NuLens is a cutting-edge web application designed to simplify and automate
+      the identification and classification of Bhutanese Ngultrum (BTN) currency denominations in real time using deep learning techniques.
+    </p>
+    <div class="box-button animate__animated animate__zoomIn animate__delay-3s">
+      <div class="button-wrapper">
+        <div class="button-borders">
+          <a href="#how-it-works">
+            <button class="primary-button">Get Started</button>
+          </a>
         </div>
       </div>
     </div>
-  </header>
-  
-  <!-- ***** Header Area End ***** -->
+    <div class="scroll-down-arrow animate__animated animate__fadeInDown animate__delay-4s">
+      <a href="#how-it-works">↓</a>
+    </div>
+  </div>
+</section>
+<!-- ***** Hero Section End ***** -->
 
-  <!-- ***** Content Section Start ***** -->
-  <section class="hero">
-    <div class="container text-center">
-      <img src="assets/images/Hero_1.png" alt="classifier Logo" class="hero-logo animate__animated animate__fadeInDown">
-      <h1 class="animate__animated animate__fadeInUp animate__delay-1s">Detect Your Ngultrums!</h1>
-      <p class="animate__animated animate__fadeInUp animate__delay-2s">
-        Ngultrum Classifier is a cutting-edge web application designed to simplify and automate
-        the identification and classification of Bhutanese Ngultrum (BTN) currency denominations in real time using deep learning techniques.
+<!-- ***** How It Works Section Start ***** -->
+<section id="how-it-works" class="hero parallax-section">
+  <div class="container text-center">
+    <h1 class="animate__animated animate__fadeInUp">How It Works</h1>
+    <p class="animate__animated animate__fadeInUp animate__delay-1s">
+      Simply allow access to your device's camera, and point it at a Bhutanese Ngultrum note.
+      The system will automatically capture the image and classify the denomination in real-time.
+    </p>
+    <div class="box-button animate__animated animate__zoomIn animate__delay-2s">
+      <div class="button-wrapper">
+        <div class="button-borders">
+          <button id="camera-access-btn" class="primary-button">Allow Access to Camera</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ***** How It Works Section End ***** -->
+
+<!-- ***** About Section Start ***** -->
+<section id="about" class="parallax-section about-section">
+  <div class="container text-center">
+    <h1 class="animate__animated animate__fadeInUp">About Nu Lens</h1>
+    
+    <div class="about-text text-left animate__animated animate__fadeInUp">
+      <p>
+        Welcome to the Ngultrum Recognition application, designed to simplify and streamline your experience with Bhutanese currency. Our app uses cutting-edge image recognition technology to instantly identify and classify Bhutanese Ngultrum (BTN) denominations in real-time.
       </p>
-      <div class="box-button animate__animated animate__zoomIn animate__delay-3s">
-        <div class="button-wrapper">
-          <div class="button-borders">
-            <a href="home.html">
-              <button class="primary-button">Get Started</button>
-            </a>
-            
-          </div>
-        </div>
-      </div>
+
+      <h3>Key Features:</h3>
+
+      <ul>
+        <li><strong>Real-Time Currency Recognition:</strong> No need for manual input or complex calculations—simply use your camera to capture the image of the Ngultrum, and the app will automatically classify it for you.</li>
+        <li><strong>Accuracy:</strong> Our deep learning model ensures high accuracy in identifying and classifying notes, even in varied lighting and conditions.</li>
+      </ul>
+
+      <p>This application is designed to support various sectors by automating currency classification, making it easier to handle transactions, enhance financial applications, and more.</p>
     </div>
-  </section>
-  <!-- ***** Content Section End ***** -->
+  </div>
+</section>
+<!-- ***** About Section End ***** -->
 
-  <!-- ***** Footer Section Start ***** -->
-  <footer class="footer-area">
-    <div class="container"> 
-      <div class="col-lg-12 text-center">
-        <p>© 2025 Ngultrum Classifier | All rights reserved</p>
-      </div>
+<!-- ***** Popup ***** -->
+<div id="cookie-popup" class="cookie-popup">
+  <div class="cookie-card">
+    <span class="title">Attention!</span>
+    <p class="description">
+      We use the image captured from your device to store in our database for future implementations.
+    </p>
+    <div class="actions">
+      <button class="accept" onclick="window.location.href='camera.html'">Accept</button>
+      <button class="decline" onclick="closeCookiePopup()">Decline</button>
     </div>
-  </footer>
-  <!-- ***** Footer Section End ***** -->
+  </div>
+</div>
+<!-- ***** Popup End ***** -->
 
-  <!-- Scripts -->
+<!-- ***** Footer Section Start ***** -->
+<footer class="footer-area">
+  <div class="container">
+    <div class="col-lg-12 text-center">
+      <p>© 2025 NuLens | All rights reserved</p>
+    </div>
+  </div>
+</footer>
+<!-- ***** Footer Section End ***** -->
 
-  
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/custom.js"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-    lucide.createIcons();
-  </script>
- <script>
+<!-- Scripts -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/custom.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  lucide.createIcons();
+</script>
+
+<!-- Menu toggle for mobile -->
+<script>
   document.addEventListener("DOMContentLoaded", function () {
     const menuToggle = document.getElementById("menu-toggle");
     const nav = document.getElementById("mobile-nav");
@@ -119,7 +171,48 @@
     });
   });
 </script>
-  
-</body>
 
+<!-- Camera button -->
+<script>
+  const cameraBtn = document.getElementById("camera-access-btn");
+  const cookiePopup = document.getElementById("cookie-popup");
+
+  cameraBtn.addEventListener("click", () => {
+    cookiePopup.style.display = "flex";
+  });
+
+  function closeCookiePopup() {
+    cookiePopup.style.display = "none";
+  }
+</script>
+
+<!-- Scroll Spy (active link underline) -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".main-nav .nav li a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 120; // header offset
+        const sectionHeight = section.offsetHeight;
+
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  });
+</script>
+
+</body>
 </html>
